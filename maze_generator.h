@@ -1,6 +1,3 @@
-#ifndef MAZE_GENERATOR_H
-#define MAZE_GENERATOR_H
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -65,5 +62,3 @@ void createMaze(char maze[2 * height + 1][2 * width + 1]);
  *  return : 없음
  ***********************************************************/
 void printMaze(char maze[2 * height + 1][2 * width + 1]);
-
-#endif // MAZE_GENERATOR_H
