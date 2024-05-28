@@ -48,8 +48,8 @@ int find(DisjointSet *ds, int i) {
  *  return : 없음
  ***********************************************************/
 void unionSets(DisjointSet *ds, int i, int j) {
-    int rootI = find(ds, i);    // 1번 집합의 루트
-    int rootJ = find(ds, j);    // 2번 집합의 루트
+    int rootI = find(ds, i);    // 1번 집합의 루트(구분자, 대표원소)
+    int rootJ = find(ds, j);    // 2번 집합의 루트(구분자, 대표원소)
     if (rootI == rootJ) return; // 이미 같은 집합에 속해있음
 
     if (ds[rootI].rank > ds[rootJ].rank) {  // 만약 1번 집합이 더 길면
@@ -70,7 +70,6 @@ void unionSets(DisjointSet *ds, int i, int j) {
  ***********************************************************/
 void shuffle(Wall *array, int n) {  // 랜덤섞기
     srand(time(NULL)); // 시드 초기화
-
     for (int i = n - 1; i > 0; i--) {   // 배열의 끝부터 시작하여
         int j = rand() % (i + 1);   // 0부터 i까지의 랜덤한 수를 뽑은 뒤
         Wall temp = array[i];   // array[i] 와 array[j]를 바꾼다
@@ -94,6 +93,9 @@ void createMaze(char maze[2 * height + 1][2 * width + 1]) {
         else maze[y][x] = ' ';  // 블록의 중심 (비어있다)
 
     // 벽 리스트 생성
+
+    // 왜 walls의 크기는 width * height * 2인가?
+    // 가로 벽은 (width - 1) * height개, 세로 벽은 width * (height - 1)개가 있으므로
     Wall walls[width * height * 2]; // 벽 리스트 선언
     int wallcount = 0;  // 벽 리스트의 크기
     for (int y = 0; y < height; y++)    // 벽 리스트 초기화
@@ -104,7 +106,7 @@ void createMaze(char maze[2 * height + 1][2 * width + 1]) {
     // 벽 리스트를 랜덤하게 섞음
     shuffle(walls, wallcount);
 
-    // 크루스칼 알고리즘을 사용하여 미로 생성
+    // 크루스칼 알고리즘을 사용하여 미로 생성 - 벽 리스트를 순서대로 탐색하며 두 셀을 연결(벽을 삭제)한다.
     DisjointSet *ds = createDisjointSet(width * height);
 
     for (int i = 0; i < wallcount; i++) {
@@ -114,7 +116,7 @@ void createMaze(char maze[2 * height + 1][2 * width + 1]) {
         int cell1Index = cell1.y * width + cell1.x;    // 1번 셀의 인덱스
         int cell2Index = cell2.y * width + cell2.x;    // 2번 셀의 인덱스
         // 셀의 인덱스는 y * width + x로 계산할 수 있다 (1차원 배열을 2차원으로 봄).
-        if (find(ds, cell1Index) != find(ds, cell2Index)) {    // 두 셀이 같은 집합에 속해있지 않다면
+        if (find(ds, cell1Index) != find(ds, cell2Index)) {    // 두 셀이 같은 집합에 속해있지 않다면 
             unionSets(ds, cell1Index, cell2Index); // 두 셀을 연결힌다
             if (cell1.x == cell2.x) maze[cell1.y * 2 + 2][cell1.x * 2 + 1] = ' '; // 세로 벽을 없앰 (x값이 같으므로)
             else maze[cell1.y * 2 + 1][cell1.x * 2 + 2] = ' ';    // 가로 벽을 없앰 (y값이 같으므로)
@@ -126,7 +128,6 @@ void createMaze(char maze[2 * height + 1][2 * width + 1]) {
     // 시작점과 끝점 설정
     maze[1][1] = 'S';  // 시작점
     maze[2 * height - 1][2 * width - 1] = 'E';  // 끝점
-
 }
 
 /***********************************************************
