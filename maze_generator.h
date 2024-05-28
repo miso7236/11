@@ -25,7 +25,7 @@ int width, height;
  *  input  : (int) 자료 구조의 크기
  *  return : (DisjointSet*) 초기화된 유니온-파인드 자료 구조의 포인터
  ***********************************************************/
-DisjointSet *createDisjointSet(int size);
+DisjointSet* createDisjointSet(int size);
 
 /***********************************************************
  *  요소 i를 포함하는 집합의 루트를 찾는다.
@@ -33,7 +33,7 @@ DisjointSet *createDisjointSet(int size);
  *           (int) 찾고자 하는 요소의 인덱스
  *  return : (int) 요소 i를 포함하는 집합의 루트 인덱스
  ***********************************************************/
-int find(DisjointSet *ds, int i);
+int find(DisjointSet* ds, int i);
 
 /***********************************************************
  *  요소 i와 j를 포함하는 두 집합을 합친다.
@@ -42,7 +42,7 @@ int find(DisjointSet *ds, int i);
  *           (int) 합칠 두 번째 요소의 인덱스
  *  return : 없음
  ***********************************************************/
-void unionSets(DisjointSet *ds, int i, int j);
+void unionSets(DisjointSet* ds, int i, int j);
 
 /***********************************************************
  *  벽 배열을 랜덤하게 섞는다.
@@ -50,7 +50,7 @@ void unionSets(DisjointSet *ds, int i, int j);
  *           (int) 배열의 크기
  *  return : 없음
  ***********************************************************/
-void shuffle(Wall *array, int n);
+void shuffle(Wall* array, int n);
 
 /***********************************************************
  *  크루스칼 알고리즘을 사용하여 미로를 생성한다.
