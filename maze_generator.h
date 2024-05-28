@@ -62,3 +62,5 @@ void createMaze(char maze[2 * height + 1][2 * width + 1]);
  *  return : 없음
  ***********************************************************/
 void printMaze(char maze[2 * height + 1][2 * width + 1]);
+
+void printmazefile(char maze[2 * height + 1][2 * width + 1], int width, int height);

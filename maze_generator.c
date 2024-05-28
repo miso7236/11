@@ -9,6 +9,7 @@ int main() {
     
     createMaze(maze);
     printMaze(maze);
+    printmazefile(maze, width, height);
 
     return 0;
 }
@@ -141,4 +142,18 @@ void printMaze(char maze[2 * height + 1][2 * width + 1]) {
             printf("%c", maze[y][x]);
         printf("\n");
     }
+}
+
+void printmazefile(char maze[2 * height + 1][2 * width + 1], int width, int height) {
+    // 파일 이름 형식은 width_height_maze.txt
+    // ex) 10_10_maze.txt
+    char filename[20];
+    sprintf(filename, "%d_%d_maze.txt", width, height);
+    FILE *fp = fopen(filename, "w");
+    for (int y = 0; y < 2 * height + 1; y++) {
+        for (int x = 0; x < 2 * width + 1; x++) 
+            fprintf(fp, "%c", maze[y][x]);
+        fprintf(fp, "\n");
+    }
+    fclose(fp);
 }
