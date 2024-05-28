@@ -18,7 +18,7 @@ int main() {
  *  input  : (int) 자료 구조의 크기
  *  return : (DisjointSet*) 초기화된 유니온-파인드 자료 구조의 포인터
  ***********************************************************/
-DisjointSet *createDisjointSet(int size) {
+DisjointSet* createDisjointSet(int size) {
     DisjointSet *ds = (DisjointSet*)malloc(size * sizeof(DisjointSet));
     for (int i = 0; i < size; i++) {
         ds[i].parent = i;   // 부모는 자기 자신
@@ -33,7 +33,7 @@ DisjointSet *createDisjointSet(int size) {
  *           (int) 찾고자 하는 요소의 인덱스
  *  return : (int) 요소 i를 포함하는 집합의 루트 인덱스
  ***********************************************************/
-int find(DisjointSet *ds, int i) {  
+int find(DisjointSet* ds, int i) {  
     if (ds[i].parent != i)  // i가 루트가 아니라면
         ds[i].parent = find(ds, ds[i].parent);   // 경로 압축
     
@@ -47,7 +47,7 @@ int find(DisjointSet *ds, int i) {
  *           (int) 합칠 두 번째 요소의 인덱스
  *  return : 없음
  ***********************************************************/
-void unionSets(DisjointSet *ds, int i, int j) {
+void unionSets(DisjointSet* ds, int i, int j) {
     int rootI = find(ds, i);    // 1번 집합의 루트(구분자, 대표원소)
     int rootJ = find(ds, j);    // 2번 집합의 루트(구분자, 대표원소)
     if (rootI == rootJ) return; // 이미 같은 집합에 속해있음
@@ -68,7 +68,7 @@ void unionSets(DisjointSet *ds, int i, int j) {
  *           (int) 배열의 크기
  *  return : 없음
  ***********************************************************/
-void shuffle(Wall *array, int n) {  // 랜덤섞기
+void shuffle(Wall* array, int n) {  // 랜덤섞기
     srand(time(NULL)); // 시드 초기화
     for (int i = n - 1; i > 0; i--) {   // 배열의 끝부터 시작하여
         int j = rand() % (i + 1);   // 0부터 i까지의 랜덤한 수를 뽑은 뒤
@@ -107,7 +107,7 @@ void createMaze(char maze[2 * height + 1][2 * width + 1]) {
     shuffle(walls, wallcount);
 
     // 크루스칼 알고리즘을 사용하여 미로 생성 - 벽 리스트를 순서대로 탐색하며 두 셀을 연결(벽을 삭제)한다.
-    DisjointSet *ds = createDisjointSet(width * height);
+    DisjointSet* ds = createDisjointSet(width * height);
 
     for (int i = 0; i < wallcount; i++) {
         Cell cell1 = walls[i].cell1;    // 벽의 왼쪽    / 위쪽 셀
