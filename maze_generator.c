@@ -145,10 +145,10 @@ void printMaze(char maze[2 * height + 1][2 * width + 1]) {
 }
 
 void printmazefile(char maze[2 * height + 1][2 * width + 1], int width, int height) {
-    // 파일 이름 형식은 width_height_maze.txt
-    // ex) 10_10_maze.txt
+    // 파일 이름 형식은 width_height.maz
+    // ex) 10_10.txt
     char filename[20];
-    //sprintf(filename, "%d_%d_maze.txt", width, height);
+    //sprintf(filename, "%d_%d.txt", width, height);
     sprintf(filename, "%d_%d.maz", width, height);
     FILE *fp = fopen(filename, "w");
     for (int y = 0; y < 2 * height + 1; y++) {
