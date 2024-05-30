@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# 현재 디렉토리와 하위 디렉토리에서 .maz 파일을 찾고 삭제
+for file in $(find . -type f -regex ".*\.maz$")
+do
+  echo "Deleting $file"
+  rm "$file"
+done
