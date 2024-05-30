@@ -1,5 +1,5 @@
 all	: maze_generator.o
-	gcc -o maze_generator maze_generator.c
+	gcc -Wall -o maze_generator maze_generator.c
 
 maze_generator.o: maze_generator.c
 
